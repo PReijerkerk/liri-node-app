@@ -14,10 +14,6 @@ npm i axios
 
 npm i node-spotify-api
 
-#Request
-
-npm i request
-
 #Moment
 
 npm i moment
