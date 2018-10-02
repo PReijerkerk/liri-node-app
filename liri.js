@@ -1,9 +1,26 @@
+//Required NPM modules
+//-------------------
+
+//Requires dotenv to gain access to secret api keys
 require("dotenv").config();
 
 //requires the NPM modules for accessing the spotify API
 var Spotify = require('node-spotify-api');
+
 //requires the information contained in the keys.js file to access spotify API
 var SpotifyKeys = require('./keys.js');
+
+//Output file for logs
+var filename = './log.txt';
+
+//NPM module used for logging solution
+var log = require('simple-node-logger').createSimpleFileLogger(filename);
+
+//All log information is allowed in log.txt
+log.setLevel('all');
+
+//Controllers and required params
+//-------------------------------
 
 //requests action
 var action = process.argv[2];
@@ -63,8 +80,39 @@ function handleAction(action, argument) {
   }
 }
 
+//Returns the argument
+//Example being returns the artist's name when requesting concert information
+function getArgument() {
+  
+  //Stores all arguments in an array
+  argumentArray = process.argv;
+
+  //Loops through all the items within the node argument
+  for (var i = 3; i < argumentArray.length; i++) {
+    argument += argumentArray[i];
+  }
+  return argument;
+}
+
 //sets spotify equal to the key info to call the spotify API
 var spotify = new Spotify(SpotifyKeys.spotify);
+//Calls spotify API to retrieve the song information for songTitle
+function getSongInfo(songTitle) {
+
+  spotify
+    .search({ type: 'track', query: songTitle})
+    .then(function(response) {
+    //console.logs the response from the Spotify API
+    console.log(response);
+  })
+    .catch(function(err) {
+    //console.logs any caught errors
+    console.log(err);
+  });
+
+}
+
+function lookupSpecificSong() {
 
 //searches the spotify API by track name 
 spotify
@@ -77,3 +125,10 @@ spotify
     //console.logs any caught errors
     console.log(err);
   });
+}
+
+//Logs data into the terminal and outputs to a text file.
+function logOutput(logText) {
+  log.info(logText);
+  console.log(logText);
+}
