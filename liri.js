@@ -10,6 +10,9 @@ var Spotify = require('node-spotify-api');
 //requires the information contained in the keys.js file to access spotify API
 var SpotifyKeys = require('./keys.js');
 
+//requires the Node Module fs for accessing do-what-it-says
+var fs = require('fs');
+
 //Output file for logs
 var filename = './log.txt';
 
@@ -94,6 +97,9 @@ function getArgument() {
   return argument;
 }
 
+//Spotify-this-song
+//-------------------
+
 //Calls spotify API to retrieve the song information for songTitle
 function getSongInfo(songTitle) {
 
@@ -160,8 +166,33 @@ spotify
   });
 }
 
+//Do-what-it-says
+//-------------------
+
+function doWhatItSays() {
+  fs.readFile('random.txt','utf8', (err, data) => {
+    if (err) {
+      logOutput(err);
+    }else {
+    
+    //Creates an array for the data in the random.text file
+    var randomTxtArray = data.split(",");
+
+    //Sets action equal to the first item from the array
+    action = randomTxtArray[0];
+    
+    //Sets the argument to the second item from the array
+    argument = randomTxtArray[1];
+
+    //Calls the controller function to handle the data from the random file and calls the appropriate function
+    handleAction(action, argument);
+    }
+  });
+}
+
 //Logs data into the terminal and outputs to a text file.
 function logOutput(logText) {
   log.info(logText);
   console.log(logText);
 }
+
