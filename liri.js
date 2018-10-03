@@ -94,36 +94,65 @@ function getArgument() {
   return argument;
 }
 
-//sets spotify equal to the key info to call the spotify API
-var spotify = new Spotify(SpotifyKeys.spotify);
 //Calls spotify API to retrieve the song information for songTitle
 function getSongInfo(songTitle) {
+
+  //sets spotify equal to the key info to call the spotify API
+  var spotify = new Spotify(SpotifyKeys.spotify);
 
   spotify
     .search({ type: 'track', query: songTitle})
     .then(function(response) {
-    //console.logs the response from the Spotify API
-    console.log(response);
+
+    //Default search on the spotify API returns 20 objects
+    //Going to attempt to find documentation regarding limit on npm later to render this solution unneeded
+    var artistsArray = response.tracks.items[0].album.artists;
+    
+    //Array to hold artists names, for songs that return multiple artists
+    var artistNames = [];
+    
+    //Goes down the length of the array and pushes the artists names for each song
+    for (var i = 0; i < artistsArray.length; i++) {
+      artistNames.push(artistsArray[i].name);
+    }
+
+    //Converts the array into a string
+    var artists = artistNames.join(", ");
+    
+    //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
+    logOutput("Artist: " + artists);
+    logOutput("Song: " + response.tracks.items[0].name);
+    logOutput("Spotify preview URL: " + response.tracks.items[0].preview_url);
+    logOutput("Album name: " + response.tracks.items[0].album.name);
   })
     .catch(function(err) {
     //console.logs any caught errors
     console.log(err);
+    logOutput(err);
   });
 
 }
 
+//When no song title is provided return "The Sign" by Ace of Base
 function lookupSpecificSong() {
+
+//sets spotify equal to the key info to call the spotify API
+var spotify = new Spotify(SpotifyKeys.spotify);
 
 //searches the spotify API by track name 
 spotify
-  .search({ type: 'track', query: 'All the Small Things' })
+  .request( 'https://api.spotify.com/v1/tracks/3DYVWvPh3kGwPasp7yjahc' )
   .then(function(response) {
-    //console.logs the response from the Spotify API
-    console.log(response);
+    //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
+    logOutput("Artist: " + response.artists[0].name);
+    logOutput("Song: " + response.name);
+    logOutput("Spotify preview URL: " + response.preview_url);
+    logOutput("Album name: " + response.album.name);
   })
   .catch(function(err) {
     //console.logs any caught errors
     console.log(err);
+    logOutput(err);
   });
 }
 
