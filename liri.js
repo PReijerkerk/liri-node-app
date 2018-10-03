@@ -120,10 +120,12 @@ function getSongInfo(songTitle) {
     var artists = artistNames.join(", ");
     
     //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
+    logOutput("spotify-this-song " + response.tracks.items[0].name);
     logOutput("Artist: " + artists);
     logOutput("Song: " + response.tracks.items[0].name);
     logOutput("Spotify preview URL: " + response.tracks.items[0].preview_url);
     logOutput("Album name: " + response.tracks.items[0].album.name);
+    logOutput("------------");
   })
     .catch(function(err) {
     //console.logs any caught errors
@@ -144,10 +146,12 @@ spotify
   .request( 'https://api.spotify.com/v1/tracks/3DYVWvPh3kGwPasp7yjahc' )
   .then(function(response) {
     //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
+    logOutput("spotify-this-song " + response.name);
     logOutput("Artist: " + response.artists[0].name);
     logOutput("Song: " + response.name);
     logOutput("Spotify preview URL: " + response.preview_url);
     logOutput("Album name: " + response.album.name);
+    logOutput("------------");
   })
   .catch(function(err) {
     //console.logs any caught errors
