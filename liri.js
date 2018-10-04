@@ -172,33 +172,61 @@ spotify
 //movie-this
 //-------------------
 
+function getMovieInfo(movieTitle) {
+  axios.get('http://www.omdbapi.com/?apikey=trilogy&t=' +movieTitle)
+  .then(function (response) {
+  //Node command
+  logOutput('Command: node liri.js movie-this ' + movieTitle);
+  //Title of the movie.
+  logOutput('Title: ' + response.data.Title);
+  //Year the movie came out.
+  logOutput('Year: ' + response.data.Year);
+  //IMDB Rating of the movie.
+  logOutput('IMDB Rating: ' + response.data.Ratings[0].Value);
+  //Rotten Tomatoes Rating of the movie.
+  logOutput('Rotton Tomatoes Rating ' + response.data.Ratings[1].Value);
+  //Country where the movie was produced.
+  logOutput('Country ' + response.data.Country);
+  //Language of the movie.
+  logOutput('Language ' + response.data.Language);
+  //Plot of the movie.
+  logOutput('Plot ' + response.data.Plot);
+  //Actors in the movie.
+  logOutput('Actors ' + response.data.Actors);
+  logOutput("------------");
+})
+.catch(function (error) {
+  //Logs any errors to the log.txt files
+  logOutput(error);
+});
+}
 
-
+//Function to return the movie Mr. Nobody if no movie title is input
 function lookupSpecificMovie () {
   axios.get('http://www.omdbapi.com/?apikey=trilogy&t=Mr.+Nobody')
   .then(function (response) {
   //Node command
   logOutput('Command: node liri.js movie-this ' + response.data.Title);
-  //   Title of the movie.
+  //Title of the movie.
   logOutput('Title: ' + response.data.Title);
-  //   Year the movie came out.
+  //Year the movie came out.
   logOutput('Year: ' + response.data.Year);
-  //   IMDB Rating of the movie.
+  //IMDB Rating of the movie.
   logOutput('IMDB Rating: ' + response.data.Ratings[0].Value);
-  //   Rotten Tomatoes Rating of the movie.
+  //Rotten Tomatoes Rating of the movie.
   logOutput('Rotton Tomatoes Rating ' + response.data.Ratings[1].Value);
-  //   Country where the movie was produced.
+  //Country where the movie was produced.
   logOutput('Country ' + response.data.Country);
-  //   Language of the movie.
+  //Language of the movie.
   logOutput('Language ' + response.data.Language);
-  //   Plot of the movie.
+  //Plot of the movie.
   logOutput('Plot ' + response.data.Plot);
-  //   Actors in the movie.
+  //Actors in the movie.
   logOutput('Actors ' + response.data.Actors);
   logOutput("------------");
 })
 .catch(function (error) {
-  console.log(error);
+  //Logs any errors to the log.txt files
   logOutput(error);
 });
 }
