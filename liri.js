@@ -13,6 +13,9 @@ var SpotifyKeys = require('./keys.js');
 //requires the Node Module fs for accessing do-what-it-says
 var fs = require('fs');
 
+//requires the Node Module axios for accessing ombd API and bands in town API
+var axios = require('axios');
+
 //Output file for logs
 var filename = './log.txt';
 
@@ -126,7 +129,7 @@ function getSongInfo(songTitle) {
     var artists = artistNames.join(", ");
     
     //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
-    logOutput("spotify-this-song " + response.tracks.items[0].name);
+    logOutput("Command: spotify-this-song " + response.tracks.items[0].name);
     logOutput("Artist: " + artists);
     logOutput("Song: " + response.tracks.items[0].name);
     logOutput("Spotify preview URL: " + response.tracks.items[0].preview_url);
@@ -152,7 +155,7 @@ spotify
   .request( 'https://api.spotify.com/v1/tracks/3DYVWvPh3kGwPasp7yjahc' )
   .then(function(response) {
     //Console.logs the response from the Spotify API for Artist, Song title, URL, and Album name
-    logOutput("spotify-this-song " + response.name);
+    logOutput("Command: spotify-this-song " + response.name);
     logOutput("Artist: " + response.artists[0].name);
     logOutput("Song: " + response.name);
     logOutput("Spotify preview URL: " + response.preview_url);
@@ -164,6 +167,40 @@ spotify
     console.log(err);
     logOutput(err);
   });
+}
+
+//movie-this
+//-------------------
+
+
+
+function lookupSpecificMovie () {
+  axios.get('http://www.omdbapi.com/?apikey=trilogy&t=Mr.+Nobody')
+  .then(function (response) {
+  //Node command
+  logOutput('Command: node liri.js movie-this ' + response.data.Title);
+  //   Title of the movie.
+  logOutput('Title: ' + response.data.Title);
+  //   Year the movie came out.
+  logOutput('Year: ' + response.data.Year);
+  //   IMDB Rating of the movie.
+  logOutput('IMDB Rating: ' + response.data.Ratings[0].Value);
+  //   Rotten Tomatoes Rating of the movie.
+  logOutput('Rotton Tomatoes Rating ' + response.data.Ratings[1].Value);
+  //   Country where the movie was produced.
+  logOutput('Country ' + response.data.Country);
+  //   Language of the movie.
+  logOutput('Language ' + response.data.Language);
+  //   Plot of the movie.
+  logOutput('Plot ' + response.data.Plot);
+  //   Actors in the movie.
+  logOutput('Actors ' + response.data.Actors);
+  logOutput("------------");
+})
+.catch(function (error) {
+  console.log(error);
+  logOutput(error);
+});
 }
 
 //Do-what-it-says
@@ -195,4 +232,5 @@ function logOutput(logText) {
   log.info(logText);
   console.log(logText);
 }
+
 
