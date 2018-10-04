@@ -31,6 +31,10 @@ npm i simple-node-logger
 Below is a list of the commands you can use with LIRI
 
 #Get Concert
+node liri.js concert-this '< artist name here >'
 #Get Song Info
+node liri.js spotify-this-song '< song name here >'
 #Get Movie Info
+node liri.js movie-this '< movie name here >'
 #Get Random Info
+node liri.js do-what-it-says
