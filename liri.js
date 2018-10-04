@@ -47,7 +47,7 @@ function handleAction(action, argument) {
     //Grabs the artistName arguement
     var artistName = argument;
     //If artistName is not provided defaults to Avatar
-    if (artistName = "") {
+    if (artistName === "") {
       lookupAvatar();
     } else {
       //Gets the event info for artist name
@@ -99,6 +99,49 @@ function getArgument() {
   }
   return argument;
 }
+
+//concert-this
+//-------------------
+function getEventInfo(artistName){
+  //calls the bandsintown api to look for events by artist name
+  axios.get("https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp")
+  .then(function (response) {
+    //for loop to iterate along the response.data
+    for (var i = 0; i < 3; i++) {
+    //Logs the command used, venue name, location and date of the show for the artist name
+    logOutput("Command: node liri.js concert-this " + artistName);
+    logOutput("Venue Name: " + response.data[i].venue.name);
+    logOutput("Location: " + response.data[i].venue.city + ' ,' + response.data[i].venue.region);
+    logOutput("Date: " + response.data[i].datetime);
+    logOutput("------------");
+    }
+})
+.catch(function (error) {
+  //Logs any errors to the log.txt files
+  logOutput(error);
+});
+}
+
+function lookupAvatar(){
+  //calls the bandsintown api to look for events by Avatar if no artist is input
+  axios.get("https://rest.bandsintown.com/artists/avatar/events?app_id=codingbootcamp")
+  .then(function (response) {
+    //for loop to iterate along the response.data
+    for (var i = 0; i < 3; i++) {
+    //Logs the command used, venue name, location and date of the show for the artist name
+    logOutput("Command: node liri.js concert-this");
+    logOutput("Venue Name: " + response.data[i].venue.name);
+    logOutput("Location: " + response.data[i].venue.city + ' ,' + response.data[i].venue.region);
+    logOutput("Date: " + response.data[i].datetime);
+    logOutput("------------");
+    }
+})
+.catch(function (error) {
+  //Logs any errors to the log.txt files
+  logOutput(error);
+});
+}
+
 
 //Spotify-this-song
 //-------------------
@@ -173,6 +216,7 @@ spotify
 //-------------------
 
 function getMovieInfo(movieTitle) {
+  //Calls on the OMDB api to get data for var movieTitle
   axios.get('http://www.omdbapi.com/?apikey=trilogy&t=' +movieTitle)
   .then(function (response) {
   //Node command
@@ -203,6 +247,7 @@ function getMovieInfo(movieTitle) {
 
 //Function to return the movie Mr. Nobody if no movie title is input
 function lookupSpecificMovie () {
+  //Calls upon the OMDB api to get data related to the 2009 movie MR. Nobody
   axios.get('http://www.omdbapi.com/?apikey=trilogy&t=Mr.+Nobody')
   .then(function (response) {
   //Node command
