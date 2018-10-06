@@ -1,40 +1,40 @@
-# liri-node-app
+# Liri-node-app
 
 LIRI is a Language Interpretation and Recognition Interface. You can use LIRI to find an artists next concert, provide you info about a song or movie, or allow you to choose a random action from your text file.
 
-#Installs
+# Installs
 
 Please see the package.json for a list of all dependent node packages, below are the main ones used.
 
-#Axios
+# Axios
 
-npm i axios
+- npm i axios
 
-#Spotify
+# Spotify
 
-npm i node-spotify-api
+- npm i node-spotify-api
 
-#Moment
+# Moment
 
-npm i moment
+- npm i moment
 
-#dotenv
+# Dotenv
 
-npm i dotenv
+- npm i dotenv
 
-#Simple Node Logger
+# Simple Node Logger
 
-npm i simple-node-logger
+- npm i simple-node-logger
 
-#Get Started
+# Get Started
 
 Below is a list of the commands you can use with LIRI
 
-#Get Concert
-node liri.js concert-this '< artist name here >'
-#Get Song Info
-node liri.js spotify-this-song '< song name here >'
-#Get Movie Info
-node liri.js movie-this '< movie name here >'
-#Get Random Info
-node liri.js do-what-it-says
+# Get Concert
+- node liri.js concert-this '< artist name here >'
+# Get Song Info
+- node liri.js spotify-this-song '< song name here >'
+# Get Movie Info
+- node liri.js movie-this '< movie name here >'
+# Get Random Info
+- node liri.js do-what-it-says
