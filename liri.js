@@ -16,6 +16,9 @@ var fs = require('fs');
 //requires the Node Module axios for accessing ombd API and bands in town API
 var axios = require('axios');
 
+//Requires the NPM module for moment.js
+var moment = require('moment');
+
 //Output file for logs
 var filename = './log.txt';
 
@@ -112,7 +115,7 @@ function getEventInfo(artistName){
     logOutput("Command: node liri.js concert-this " + artistName);
     logOutput("Venue Name: " + response.data[i].venue.name);
     logOutput("Location: " + response.data[i].venue.city + ' ,' + response.data[i].venue.region);
-    logOutput("Date: " + response.data[i].datetime);
+    logOutput("Date: " + moment(response.data[i].datetime).format("MMMM Do YYYY, hh:mm:ss a"));
     logOutput("------------");
     }
 })
@@ -132,7 +135,7 @@ function lookupAvatar(){
     logOutput("Command: node liri.js concert-this");
     logOutput("Venue Name: " + response.data[i].venue.name);
     logOutput("Location: " + response.data[i].venue.city + ' ,' + response.data[i].venue.region);
-    logOutput("Date: " + response.data[i].datetime);
+    logOutput("Date: " + moment(response.data[i].datetime).format("MMMM Do YYYY, hh:mm:ss a"));
     logOutput("------------");
     }
 })
