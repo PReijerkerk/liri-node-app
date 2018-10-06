@@ -6,23 +6,23 @@ LIRI is a Language Interpretation and Recognition Interface. You can use LIRI to
 
 Please see the package.json for a list of all dependent node packages, below are the main ones used.
 
-# Axios
+### Axios
 
 - npm i axios
 
-# Spotify
+### Spotify
 
 - npm i node-spotify-api
 
-# Moment
+### Moment
 
 - npm i moment
 
-# Dotenv
+### Dotenv
 
 - npm i dotenv
 
-# Simple Node Logger
+### Simple Node Logger
 
 - npm i simple-node-logger
 
@@ -30,11 +30,11 @@ Please see the package.json for a list of all dependent node packages, below are
 
 Below is a list of the commands you can use with LIRI
 
-# Get Concert
+### Get Concert
 - node liri.js concert-this '< artist name here >'
-# Get Song Info
+### Get Song Info
 - node liri.js spotify-this-song '< song name here >'
-# Get Movie Info
+### Get Movie Info
 - node liri.js movie-this '< movie name here >'
-# Get Random Info
+### Get Random Info
 - node liri.js do-what-it-says
