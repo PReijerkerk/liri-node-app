@@ -110,11 +110,11 @@ function getEventInfo(artistName){
   axios.get("https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp")
   .then(function (response) {
     //for loop to iterate along the response.data
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 3 && i < response.data.length; i++) {
     //Logs the command used, venue name, location and date of the show for the artist name
     logOutput("Command: node liri.js concert-this " + artistName);
     logOutput("Venue Name: " + response.data[i].venue.name);
-    logOutput("Location: " + response.data[i].venue.city + ' ,' + response.data[i].venue.region);
+    logOutput("Location: " + response.data[i].venue.city + ' , ' + response.data[i].venue.region);
     logOutput("Date: " + moment(response.data[i].datetime).format("MMMM Do YYYY, hh:mm:ss a"));
     logOutput("------------");
     }
